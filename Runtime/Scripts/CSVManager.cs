@@ -9,11 +9,6 @@ namespace Localization
     {
         private static readonly string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
 
-        public static string[] ImportTransfersByKey(LanguageText lang)
-        {
-            return ImportTransfersByKey(lang.Settings, GetKeyForObject(lang));
-        }
-
         public static string[] ImportTransfersByKey(LocalizationSettings settings, string key)
         {
             if (string.IsNullOrEmpty(key))
@@ -114,11 +109,6 @@ namespace Localization
             WriteCSV(settings, textFile);
         }
         
-        public static void SetIDLineFile(LocalizationSettings settings, LanguageText locObj)
-        {
-            SetIDLineFile(settings, GetKeyForObject(locObj), locObj.languages);
-        }
-        
         public static void SetIDLineFile(LocalizationSettings settings, string key, string[] languages)
         {
             if (string.IsNullOrEmpty(key))
@@ -211,23 +201,7 @@ namespace Localization
             using (StreamWriter stream = new StreamWriter(file))
                 stream.Write(data, Patch(settings));
         }
-
-        public static string GetKeyForObject(LanguageText lang)
-        {
-            string key = null;
-
-            if (!lang.componentTextField)
-            {
-                key = lang.text;
-            }
-            else if (lang.textMPComponent)
-            {
-                key = lang.textMPComponent.text;
-            }
-
-            return key.Replace(",", "*");
-        }
-
+        
         public static string CommaFormat(string line)
         {
             return AsteriskFormat(line.Replace(";", ","));

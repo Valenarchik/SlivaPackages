@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Localization
 {
-    [CustomEditor(typeof(LanguageFText))]
+    [CustomEditor(typeof(LanguageText))]
     public class LanguageFTextEditor: Editor
     {
-        private LanguageFText scr => (LanguageFText) target;
+        private LanguageText scr => (LanguageText) target;
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
