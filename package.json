@@ -8,5 +8,7 @@
     "com.unity.addressables": "1.21.0",
     "com.unity.nuget.newtonsoft-json": "3.0.0",
     "com.unity.textmeshpro": "3.0.0"
-  }
+  },
+  "author": "Valenarchik",
+  "license": "MIT"
 }
