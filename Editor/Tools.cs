@@ -7,7 +7,7 @@ namespace Localization
 {
     public static class Tools
     {
-        [MenuItem("Tools/Localization/Initilaze")]
+        [MenuItem("Tools/Localization/Initialize")]
         public static void InitializeLocalization()
         {
             CreateDirectoryIfNotExist();
