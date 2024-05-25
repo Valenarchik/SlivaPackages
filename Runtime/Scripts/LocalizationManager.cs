@@ -7,7 +7,8 @@ namespace Localization
     [DefaultExecutionOrder(-50)]
     public class LocalizationManager : MonoBehaviour
     {
-        private static LocalizationManager Instance;
+        public static LocalizationManager Instance { get; private set; }
+
         [SerializeField] private LangName lang = LangName.ru;
         [SerializeField, FormerlySerializedAs("settings")] private LocalizationSettings m_settings;
         public static string Lang
@@ -26,7 +27,12 @@ namespace Localization
             }
         }
 
-        public LocalizationSettings settings => m_settings;
+        public LocalizationSettings settings
+        {
+            get => m_settings;
+            set => m_settings = value;
+        }
+
         public static LocalizationSettings Settings => Instance ? Instance.m_settings : null;
         public static event Action SwitchLangEvent;
         

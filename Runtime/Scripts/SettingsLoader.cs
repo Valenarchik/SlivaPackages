@@ -7,11 +7,11 @@ namespace Localization
 {
     public static class SettingsLoader
     {
-        public const string LocalizationManagerPrefab = "Packages/com.slivagroup.localization/Runtime/WorkingData/LocalizationManager.prefab";
-
-        public static LocalizationSettings LoadSettings() 
+        public static LocalizationSettings LoadSettings()
         {
-            var manager = Object.FindAnyObjectByType<LocalizationManager>();
+            var manager = LocalizationManager.Instance == null
+                ? Object.FindAnyObjectByType<LocalizationManager>()
+                : LocalizationManager.Instance;
 
             if (manager)
             {
@@ -20,35 +20,31 @@ namespace Localization
             else
             {
 #if UNITY_EDITOR
-                var infoYGFromConfig = SettingsLoader.LoadFromAssets();
-                return infoYGFromConfig;
+                return LoadFromAssets();
 #else
                 return null;
 #endif
             }
         }
-        
+
 #if UNITY_EDITOR
         private static LocalizationSettings LoadFromAssets()
         {
-            var prefab = (GameObject)AssetDatabase.LoadAssetAtPath(LocalizationManagerPrefab, typeof(GameObject));
+            var prefab = (GameObject) AssetDatabase.LoadAssetAtPath(PathHelper.LocalizationManagerPath, typeof(GameObject));
             if (prefab == null)
             {
-                Debug.LogError($"Префаб LocalizationManager не был найден по пути: {LocalizationManagerPrefab}");
                 return null;
             }
 
             var manager = prefab.GetComponent<LocalizationManager>();
             if (manager == null)
             {
-                Debug.LogError($"На объекте LocalizationManager не был найден компонент LocalizationManager! Префаб объекта расположен по пути: {LocalizationManagerPrefab}");
                 return null;
             }
 
             var settings = manager.settings;
             if (manager == null)
             {
-                Debug.LogError($"На компоненте LocalizationManager не определено поле Settings! Префаб LocalizationManager расположен по пути: {LocalizationManagerPrefab}");
                 return null;
             }
 

@@ -25,6 +25,11 @@ namespace Localization
             }
 
             LoadSettings();
+            if (settings == null)
+            {
+                return EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            }
+            
             ProcessLabel(label);
             
             var height = 0f;
@@ -50,6 +55,15 @@ namespace Localization
             }
 
             LoadSettings();
+            if (settings == null)
+            {
+                if (GUI.Button(position.SetHeight(EditorGUIUtility.singleLineHeight), "Initialize Localization"))
+                {
+                    Tools.InitializeLocalization();
+                }
+                return;
+            }
+            
             InitializeStyles();
             ProcessLabel(label);
 
@@ -339,10 +353,11 @@ namespace Localization
             SetLanguages(property, languages);
         }
 
-        private void LoadSettings()
+        private LocalizationSettings LoadSettings()
         {
             if (settings == null)
                 settings = SettingsLoader.LoadSettings();
+            return settings;
         }
 
         private void InitializeStyles()

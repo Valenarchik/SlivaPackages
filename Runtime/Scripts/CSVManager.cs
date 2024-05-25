@@ -13,7 +13,7 @@ namespace Localization
         {
             if (string.IsNullOrEmpty(key))
             {
-                Debug.Log("Идентификатор пуст!");
+                Debug.Log("Id is empty!");
                 return null;
             }
             
@@ -38,7 +38,7 @@ namespace Localization
 
                 return result;
             }
-            Debug.Log("Не удалось найти перевод для данного объекта!");
+            Debug.Log("Couldn't find a translation for this object!");
             return null;
         }
         
@@ -113,7 +113,7 @@ namespace Localization
         {
             if (string.IsNullOrEmpty(key))
             {
-                Debug.Log("Идентификатор пуст!");
+                Debug.Log("Id is empty!");
                 return;
             }
             
