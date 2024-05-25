@@ -5,9 +5,6 @@ namespace Localization
     [CreateAssetMenu(menuName = "Localization/Settings", fileName = "LocalizationSettings")]
     public class LocalizationSettings : ScriptableObject
     {
-        [Tooltip("Метод перевода. \nAutoLocalization - Автоматический перевод через интернет с помощью Google Translate \nManual - Ручной режим. Вы сами записываете перевод в компоненте LanguageYG \nCSVFile - Перевод с помощью Excel файла.")]
-        public TranslateMethod translateMethod;
-        
         [Tooltip("Выберите языки, на которые будет переведена Ваша игра.")]
         public Languages languages;
 
