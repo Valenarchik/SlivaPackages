@@ -9,3 +9,8 @@ https://github.com/Valenarchik/UnityLocalizationSystem.git?path=/Assets/Localiza
 *Установка дополнения для LocalizationSystem также через Unity Package Manager / Add package from git URL:*
 
 https://github.com/Valenarchik/UnityLocalizationSystem.git?path=/Assets/AddressableLocalizationPackage
+
+## *CustomUtilities*
+*Установка через Unity Package Manager / Add package from git URL:*
+
+https://github.com/Valenarchik/UnityLocalizationSystem.git?path=/Assets/UtilitiesPackage
