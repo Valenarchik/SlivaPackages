@@ -1,0 +1,9 @@
+{
+  "name": "com.slivagroup.customutilities",
+  "version": "1.0.0",
+  "displayName": "Utilities",
+  "description": "",
+  "unity": "2022.3",
+  "author": "Valenarchik",
+  "license": "MIT"
+}
