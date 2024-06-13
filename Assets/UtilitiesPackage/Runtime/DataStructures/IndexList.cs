@@ -9,13 +9,12 @@ namespace DataStructures
         private int lastIndex;
         private readonly Dictionary<int, T> indexToObject;
         private readonly Dictionary<T, int> objectToIndex;
-        private readonly HashSet<int> indexesSet;
 
         public IReadOnlyDictionary<T, int> ObjectToIndex => objectToIndex;
         public IReadOnlyDictionary<int, T> IndexToObject => indexToObject;
 
-        public int Count => indexesSet.Count;
-        public IEnumerable<int> Keys => indexesSet;
+        public int Count => indexToObject.Count;
+        public IEnumerable<int> Keys => indexToObject.Keys;
         public IEnumerable<T> Values => indexToObject.Values;
 
         public IndexList()
@@ -23,7 +22,6 @@ namespace DataStructures
             lastIndex = 0;
             indexToObject = new Dictionary<int, T>();
             objectToIndex = new Dictionary<T, int>();
-            indexesSet = new HashSet<int>();
         }
 
         public IndexList(IReadOnlyDictionary<int, T> dict) : this()
@@ -44,7 +42,7 @@ namespace DataStructures
             var index = lastIndex;
             Add(index, item);
             lastIndex++;
-            while (indexesSet.Contains(lastIndex))
+            while (indexToObject.ContainsKey(lastIndex))
                 lastIndex++;
 
             return index;
@@ -52,25 +50,33 @@ namespace DataStructures
 
         public void Add(int index, T item)
         {
-            if (indexesSet.Contains(index))
-                throw new ArgumentException("Index is already taken!");
+            if (indexToObject.ContainsKey(index))
+                throw new ArgumentException($"Index is already taken! Index = {index} Item = {item}");
 
             indexToObject[index] = item;
             objectToIndex[item] = index;
-            indexesSet.Add(index);
         }
 
         public void Remove(T item)
         {
+            if (!objectToIndex.ContainsKey(item))
+                return;
+            
             var index = objectToIndex[item];
+            
             indexToObject.Remove(index);
             objectToIndex.Remove(item);
         }
 
         public void Remove(int index)
         {
-            var obj = indexToObject[index];
-            Remove(obj);
+            if (!indexToObject.ContainsKey(index))
+                return;
+            
+            var item = indexToObject[index];
+            
+            indexToObject.Remove(index);
+            objectToIndex.Remove(item);
         }
 
         public void Clear()
@@ -95,10 +101,5 @@ namespace DataStructures
     {
         public IReadOnlyDictionary<int, T> IndexToObject { get; }
         public IReadOnlyDictionary<T, int> ObjectToIndex { get; }
-
-        public int Count { get; }
-
-        public IEnumerable<int> Keys { get; }
-        public IEnumerable<T> Values { get; }
     }
 }
